@@ -143,18 +143,57 @@ export function PortalNavbar() {
   return (
     <Navbar
       shouldHideOnScroll
-      classNames={{ base: "py-2 xl:py-8 xl:px-5", menu: "mt-4 py-4" }}
+      classNames={{ base: "py-2 xl:py-8 xl:px-5 bg-[#112a4d]", menu: "mt-4 py-4", }}
       isMenuOpen={isMenuOpen}
       maxWidth="full"
     >
-      <NavbarContent className="flex gap-x-10">
+      <NavbarContent className="flex gap-x-10 max-w-[1520px] w-full mx-auto " justify="center" >
+
+
         <Link href="/">
-          <Image removeWrapper src="/images/bg-icon.png" width={80} />
+          <Image removeWrapper src="/images/bg-icon.png" width={200} />
         </Link>
 
         {/* Navbar Nav items start here */}
-        <div className="hidden xl:flex gap-x-2">
-          {navbarConfigs(portalNavbar.navbarConfig).map((navbar) => (
+        <div className="hidden xl:flex items-center gap-x-30">
+          <span className="text-white font-medium leading-tight max-w-[90px] text-left">
+            {t("promotion_ends_in")}
+          </span>
+          <div className="flex items-center gap-3 text-white ">
+
+            {/* Days */}
+            <div className="flex flex-col items-center">
+              <span className="text-3xl">27</span>
+              <span className="text-xs uppercase">{t("days")}</span>
+            </div>
+
+            <span className="text-3xl">:</span>
+
+            {/* Hours */}
+            <div className="flex flex-col items-center">
+              <span className="text-3xl">23</span>
+              <span className="text-xs uppercase">{t("hours")}</span>
+            </div>
+
+            <span className="text-3xl">:</span>
+
+            {/* Minutes */}
+            <div className="flex flex-col items-center">
+              <span className="text-3xl">45</span>
+              <span className="text-xs uppercase">{t("minutes")}</span>
+            </div>
+
+            <span className="text-3xl">:</span>
+
+            {/* Seconds */}
+            <div className="flex flex-col items-center">
+              <span className="text-3xl">07</span>
+              <span className="text-xs uppercase">{t("seconds")}</span>
+            </div>
+
+          </div>
+
+          {/* {navbarConfigs(portalNavbar.navbarConfig).map((navbar) => (
             <NavbarItem key={navbar.key}>
               {navbar.children && navbar.children.length > 0 ? (
                 // If the navbar item has children, render a dropdown
@@ -206,137 +245,10 @@ export function PortalNavbar() {
                 </Link>
               )}
             </NavbarItem>
-          ))}
+          ))} */}
         </div>
       </NavbarContent>
-      <NavbarContent justify="end">
 
-        <NavbarItem className="hidden md:block">
-          <Dropdown
-            classNames={{
-              base: "before:bg-default-200",
-              content: "p-2 border-small border-divider bg-background",
-            }}
-          >
-            <DropdownTrigger>
-              <Button
-                disableRipple
-                isIconOnly={windowBreakpoint.lt("md")}
-                radius="full"
-                size={"md"}
-                variant="bordered"
-              >
-                <div className="flex space-x-3 items-center">
-                  {/* <LucideGlobe size={18} />
-                  <LucideChevronDown
-                    className="hidden md:flex text-white/80"
-                    size={16}
-                  /> */}
-                </div>
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu>
-              {localeConfigs.map((locale) => (
-                <DropdownItem
-                  key={locale.key}
-                  onPress={() => onLanguageChange(locale)}
-                >
-                  <span className={textTv({ active: isActiveLocale(locale) })}>
-                    {locale.label}
-                  </span>
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
-        </NavbarItem>
-        <NavbarItem className="hidden md:block">
-    
-        </NavbarItem>
-      
-      </NavbarContent>
-      {/* Menu */}
-      <NavbarMenu>
-        {navbarConfigs(portalNavbar.navbarConfig).map((navbar) => (
-          <NavbarMenuItem key={navbar.key}>
-            {navbar.children && navbar.children.length > 0 ? (
-              // For items with children, we need to handle the structure differently
-              <div>
-                <div className="flex items-center mb-2">
-                  <span className="font-medium">{navbar.label}</span>
-                </div>
-                <div className="pl-4">
-                  {/* Render child items outside of NavbarMenuItem to avoid nested li elements */}
-                  {navbar.children.map((child) => (
-                    <div key={child.key} className="ml-4 py-2">
-                      <Link
-                        className="block"
-                        href={child.url ?? "/"}
-                        onClick={() => togleMenu()}
-                      >
-                        <span
-                          className={textTv({ active: isActiveMenu(child) })}
-                        >
-                          {child.label}
-                        </span>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              // If no children, render a normal link
-              <Link href={navbar.url ?? "/"} onClick={() => togleMenu()}>
-                <span className={textTv({ active: isActiveMenu(navbar) })}>
-                  {navbar.label}
-                </span>
-              </Link>
-            )}
-          </NavbarMenuItem>
-        ))}
-
-        <NavbarMenuItem className="md:hidden">
-          <div className="flex flex-col items-start mt-6 space-y-2">
-            <Dropdown
-              classNames={{
-                base: "before:bg-default-200",
-                content: "p-2 border-small border-divider bg-background",
-              }}
-            >
-              <DropdownTrigger>
-                <Button
-                  disableRipple
-                  radius="full"
-                  size={"md"}
-                  variant="bordered"
-                >
-                  {/* <div className="flex space-x-3 items-center">
-                    <LucideGlobe size={18} />
-                    <LucideChevronDown
-                      className="flex text-white/80"
-                      size={16}
-                    />
-                  </div> */}
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                {localeConfigs.map((locale) => (
-                  <DropdownItem
-                    key={locale.key}
-                    onPress={() => onLanguageChange(locale)}
-                  >
-                    <span
-                      className={textTv({ active: isActiveLocale(locale) })}
-                    >
-                      {locale.label}
-                    </span>
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-
-          </div>
-        </NavbarMenuItem>
-      </NavbarMenu>
     </Navbar>
   );
 }

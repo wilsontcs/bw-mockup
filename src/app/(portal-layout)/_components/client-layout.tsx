@@ -23,10 +23,15 @@ export default function ClientLayout(props: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className="relative flex flex-col min-h-screen w-full max-w-[1440px] mx-auto">
+    <div className="min-h-screen w-full bg-[#3A53BA]">
       <PortalNavbar />
 
-      {props.children}
+      {/* Constrained content layer */}
+      <div className="relative flex flex-col min-h-screen w-full max-w-[1520px] mx-auto">
+        {props.children}
+      </div>
+
     </div>
+
   );
 }
