@@ -4,6 +4,10 @@ import { useLocale, useTranslations } from "next-intl";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Navbar,
   NavbarContent,
 } from "@heroui/react";
@@ -14,6 +18,7 @@ import { Link } from "@heroui/react";
 import useWindowBreakpoint from "./window-breakpoint-context";
 import { LocalConfigProps } from "../config/locale";
 import { portalNavbarConfig, PortalNavbarConfigProps } from "../config/navigation";
+import { LucideCircleUser } from "lucide-react";
 
 type PortalNavbarContextProps = {
   navbarConfig: PortalNavbarConfigProps[];
@@ -184,46 +189,66 @@ export function PortalNavbar() {
         </Link>
 
         {/* Navbar Nav items start here */}
-        <div className="hidden xl:flex items-center gap-x-30">
-          <span className="text-white font-medium leading-tight max-w-[90px] text-left">
-            {t("promotion_ends_in")}
-          </span>
-          <div className="flex items-center gap-3 text-white ">
+        <div className="hidden xl:flex items-center w-full">
 
-            {/* Days */}
-            <div className="flex flex-col items-center">
-              <span className="text-3xl">{timeLeft.days}</span>
-              <span className="text-xs uppercase">{t("days")}</span>
+          {/* LEFT SIDE: Promotion + Timer */}
+          <div className="flex items-center gap-x-6">
+            <span className="text-white font-medium leading-tight max-w-[90px] text-left mx-20">
+              {t("promotion_ends_in")}
+            </span>
+
+            <div className="flex items-center gap-3 text-white">
+              {/* Days */}
+              <div className="flex flex-col items-center">
+                <span className="text-3xl">{timeLeft.days}</span>
+                <span className="text-xs uppercase">{t("days")}</span>
+              </div>
+
+              <span className="text-3xl">:</span>
+
+              {/* Hours */}
+              <div className="flex flex-col items-center">
+                <span className="text-3xl">{timeLeft.hours}</span>
+                <span className="text-xs uppercase">{t("hours")}</span>
+              </div>
+
+              <span className="text-3xl">:</span>
+
+              {/* Minutes */}
+              <div className="flex flex-col items-center">
+                <span className="text-3xl">{timeLeft.minutes}</span>
+                <span className="text-xs uppercase">{t("minutes")}</span>
+              </div>
+
+              <span className="text-3xl">:</span>
+
+              {/* Seconds */}
+              <div className="flex flex-col items-center">
+                <span className="text-3xl">{timeLeft.seconds}</span>
+                <span className="text-xs uppercase">{t("seconds")}</span>
+              </div>
             </div>
-
-            <span className="text-3xl">:</span>
-
-            {/* Hours */}
-            <div className="flex flex-col items-center">
-              <span className="text-3xl">{timeLeft.hours}</span>
-              <span className="text-xs uppercase">{t("hours")}</span>
-            </div>
-
-            <span className="text-3xl">:</span>
-
-            {/* Minutes */}
-            <div className="flex flex-col items-center">
-              <span className="text-3xl">{timeLeft.minutes}</span>
-              <span className="text-xs uppercase">{t("minutes")}</span>
-            </div>
-
-            <span className="text-3xl">:</span>
-
-            {/* Seconds */}
-            <div className="flex flex-col items-center">
-              <span className="text-3xl">{timeLeft.seconds}</span>
-              <span className="text-xs uppercase">{t("seconds")}</span>
-            </div>
-
           </div>
 
-         <Button color="warning"  variant="solid">Warning</Button>
+          {/* RIGHT SIDE: push to end */}
+          <div className="ml-auto flex items-center gap-4">
+            <Button
+              variant="solid"
+              className="bg-orange-500 text-white font-semibold"
+              radius="full"
+            >
+              {t("register_now")}
+            </Button>
 
+            <Dropdown>
+              <DropdownTrigger>
+                <LucideCircleUser size={35} className="text-white" />
+              </DropdownTrigger>
+              <DropdownMenu aria-label="User menu">
+                <DropdownItem key="login">{t("login")}</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
         </div>
       </NavbarContent>
 

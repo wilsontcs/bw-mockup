@@ -4,5 +4,6 @@
    "hours":"Hours",
    "minutes":"Minutes",
    "seconds":"Seconds",
-   "register_now":"Register Now"
+   "register_now":"Register Now",
+   "login":"Login"
 }
