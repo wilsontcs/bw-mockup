@@ -4,27 +4,16 @@ import { useLocale, useTranslations } from "next-intl";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  Menu,
   Navbar,
   NavbarContent,
-  NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
 } from "@heroui/react";
 // import Image from "next/image";
 import { Image } from "@heroui/image";
 import { Link } from "@heroui/react";
-import clsx from "clsx";
 
 import useWindowBreakpoint from "./window-breakpoint-context";
-import { LocalConfigProps, localeConfigs } from "../config/locale";
+import { LocalConfigProps } from "../config/locale";
 import { portalNavbarConfig, PortalNavbarConfigProps } from "../config/navigation";
-import { textTv } from "../styles/text-tv";
 
 type PortalNavbarContextProps = {
   navbarConfig: PortalNavbarConfigProps[];
@@ -140,6 +129,46 @@ export function PortalNavbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const targetDate = new Date("2026-02-01T00:00:00");
+  const [timeLeft, setTimeLeft] = useState({
+    days: "00",
+    hours: "00",
+    minutes: "00",
+    seconds: "00",
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate.getTime() - now;
+
+      if (distance <= 0) {
+        clearInterval(timer);
+        setTimeLeft({
+          days: "00",
+          hours: "00",
+          minutes: "00",
+          seconds: "00",
+        });
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      setTimeLeft({
+        days: String(days).padStart(2, "0"),
+        hours: String(hours).padStart(2, "0"),
+        minutes: String(minutes).padStart(2, "0"),
+        seconds: String(seconds).padStart(2, "0"),
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <Navbar
       shouldHideOnScroll
@@ -163,7 +192,7 @@ export function PortalNavbar() {
 
             {/* Days */}
             <div className="flex flex-col items-center">
-              <span className="text-3xl">27</span>
+              <span className="text-3xl">{timeLeft.days}</span>
               <span className="text-xs uppercase">{t("days")}</span>
             </div>
 
@@ -171,7 +200,7 @@ export function PortalNavbar() {
 
             {/* Hours */}
             <div className="flex flex-col items-center">
-              <span className="text-3xl">23</span>
+              <span className="text-3xl">{timeLeft.hours}</span>
               <span className="text-xs uppercase">{t("hours")}</span>
             </div>
 
@@ -179,7 +208,7 @@ export function PortalNavbar() {
 
             {/* Minutes */}
             <div className="flex flex-col items-center">
-              <span className="text-3xl">45</span>
+              <span className="text-3xl">{timeLeft.minutes}</span>
               <span className="text-xs uppercase">{t("minutes")}</span>
             </div>
 
@@ -187,65 +216,14 @@ export function PortalNavbar() {
 
             {/* Seconds */}
             <div className="flex flex-col items-center">
-              <span className="text-3xl">07</span>
+              <span className="text-3xl">{timeLeft.seconds}</span>
               <span className="text-xs uppercase">{t("seconds")}</span>
             </div>
 
           </div>
 
-          {/* {navbarConfigs(portalNavbar.navbarConfig).map((navbar) => (
-            <NavbarItem key={navbar.key}>
-              {navbar.children && navbar.children.length > 0 ? (
-                // If the navbar item has children, render a dropdown
-                <Dropdown>
-                  <DropdownTrigger>
-                    <Button
-                      disableRipple
-                      className={clsx(
-                        "px-3 py-2 text-white/60 rounded-full font-bold text-base hover:!text-white hover:border-white border-1 border-transparent",
-                        isActiveMenu(navbar) &&
-                        "!text-white border-white !text-base",
-                      )}
-                      // endContent={<LucideChevronDown size={16} />}
-                      variant="light"
-                    >
-                      {navbar.label}
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu aria-label={`${navbar.label} submenu`}>
-                    {navbar.children.map((child) => (
-                      <DropdownItem
-                        key={child.key}
-                        onPress={() => {
-                          // Navigate to the URL when dropdown item is clicked
-                          window.location.href = child.url ?? "/";
-                        }}
-                      >
-                        <span
-                          className={textTv({ active: isActiveMenu(child) })}
-                        >
-                          {child.label}
-                        </span>
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
-              ) : (
-                // If no children, render a normal link
-                <Link href={navbar.url ?? "/"}>
-                  <div
-                    className={clsx(
-                      "px-3 py-2 text-white/60 rounded-full font-bold text-sm hover:!text-white hover:border-white border-1 border-transparent",
-                      isActiveMenu(navbar) &&
-                      "!text-white border-white !text-sm",
-                    )}
-                  >
-                    {navbar.label.toLocaleUpperCase()}
-                  </div>
-                </Link>
-              )}
-            </NavbarItem>
-          ))} */}
+         <Button color="warning"  variant="solid">Warning</Button>
+
         </div>
       </NavbarContent>
 
