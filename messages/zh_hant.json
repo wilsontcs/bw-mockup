@@ -5,6 +5,15 @@
     "分鐘": "分鐘",
     "秒": "秒",
     "register_now": "立即註冊",
-    "login":"登入"
-
+    "login": "登入",
+    "copy_trading": "跟單交易",
+    "with_blackwell_invest": "與 Blackwell Invest 合作",
+    "choose_&_trade": "選擇與交易",
+    "ready_to_go_strategies": "即用型原則",
+    "ready_to_go_message": "瀏覽並複製數百種由資深交易員開發的投資策略！無論您是專業人士還是新手，現在都可以更快、更自信地進行交易。",
+    "forex": "外匯",
+    "precious_metals": "貴金屬",
+    "oil": "油",
+    "indices": "索引",
+    "invest_hint_message": "投資有風險，請謹慎投資。"
 }

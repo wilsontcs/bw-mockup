@@ -177,13 +177,11 @@ export function PortalNavbar() {
   return (
     <Navbar
       shouldHideOnScroll
-      classNames={{ base: "py-2 xl:py-8 xl:px-5 bg-[#112a4d]", menu: "mt-4 py-4", }}
+      classNames={{ base: "py-2  bg-[#112a4d]", menu: "mt-4 py-4", }}
       isMenuOpen={isMenuOpen}
       maxWidth="full"
     >
       <NavbarContent className="flex gap-x-10 max-w-[1520px] w-full mx-auto " justify="center" >
-
-
         <Link href="/">
           <Image removeWrapper src="/images/bg-icon.png" width={200} />
         </Link>

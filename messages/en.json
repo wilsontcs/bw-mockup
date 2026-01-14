@@ -1,9 +1,19 @@
 {
-   "promotion_ends_in":"PROMOTION ENDS IN",
-   "days":"Days",
-   "hours":"Hours",
-   "minutes":"Minutes",
-   "seconds":"Seconds",
-   "register_now":"Register Now",
-   "login":"Login"
+   "promotion_ends_in": "PROMOTION ENDS IN",
+   "days": "Days",
+   "hours": "Hours",
+   "minutes": "Minutes",
+   "seconds": "Seconds",
+   "register_now": "Register Now",
+   "login": "Login",
+   "copy_trading": "COPY TRADING",
+   "with_blackwell_invest": "with Blackwell Invest",
+   "choose_&_trade": "Choose & Trade",
+   "ready_to_go_strategies": "Ready-To-Go Strategies",
+   "ready_to_go_message": "Browse and copy hundreds of investment strategies developed by master traders! Whether you are a pro or beginner, you can now trade quicker and more confidently.",
+   "forex": "Forex",
+   "precious_metals": "Precious Metals",
+   "oil": "Oil",
+   "indices": "Indices",
+   "invest_hint_message": "When you invest, your captial is at risk. Be prident."
 }
