@@ -15,5 +15,12 @@
     "precious_metals": "贵金属",
     "oil": "油",
     "indices": "索引",
-    "invest_hint_message": "投资有风险，请谨慎投资。"
+    "invest_hint_message": "投资有风险，请谨慎投资。",
+    "fast_matching": "快速匹配",
+    "spot_light": "聚光灯",
+    "top_strategies": "顶级策略",
+    "low_drawdown": "低回撤",
+    "medium_drawdown": "中等回撤",
+    "high_drawdown": "高回撤",
+    "new_strategies": "新策略"
 }

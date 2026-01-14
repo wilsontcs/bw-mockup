@@ -15,5 +15,12 @@
    "precious_metals": "Precious Metals",
    "oil": "Oil",
    "indices": "Indices",
-   "invest_hint_message": "When you invest, your captial is at risk. Be prident."
+   "invest_hint_message": "When you invest, your captial is at risk. Be prident.",
+   "fast_matching": "Fast Matching",
+   "spot_light": "Spotlight",
+   "top_strategies": "Top Strategies",
+   "low_drawdown": "Low Drawdown",
+   "medium_drawdown": "Medium Drawdown",
+   "high_drawdown": "High Drawdown",
+   "new_strategies": "New Strategies"
 }
