@@ -22,5 +22,10 @@
    "low_drawdown": "Low Drawdown",
    "medium_drawdown": "Medium Drawdown",
    "high_drawdown": "High Drawdown",
-   "new_strategies": "New Strategies"
+   "new_strategies": "New Strategies",
+   "easy_analysis": "Easy Analysis",
+   "easy_analysis_message": "Instant clarity on the Masters’ profile. Get a snapshot of their trade history, profitability, risk, and portfolio all in one place. ",
+   "trade_like_a_pro_in_minute": "Trade Like a Pro in Minutes",
+   "trade_like_pro_step_1": "Install our app, \"BlackWell Invest\"",
+   "trade_like_pro_step_2": "Choose a signal Master and click \"Copy\""
 }

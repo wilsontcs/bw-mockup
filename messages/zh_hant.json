@@ -22,5 +22,12 @@
     "low_drawdown": "低迴檔",
     "medium_drawdown": "中檔回檔",
     "high_drawdown": "高回檔",
-    "new_strategies": "新原則"
+    "new_strategies": "新原則",
+    "easy_analysis": "簡易分析",
+    "easy_analysis_message": "立即了解大師級人物的概況。一目了然地掌握他們的交易歷史、盈利能力、風險和投資組合。",
+    "trade_like_a_pro_in_minute": "幾分鐘內像專業人士一樣交易",
+    "trade_like_pro_step_1": "安裝我們的應用程序，\"BlackWell Invest\"",
+    "trade_like_pro_step_2": "選擇一個訊號主控並點選 \"複製\""
+
+
 }

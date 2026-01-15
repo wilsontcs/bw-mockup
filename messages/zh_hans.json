@@ -22,5 +22,11 @@
     "low_drawdown": "低回撤",
     "medium_drawdown": "中等回撤",
     "high_drawdown": "高回撤",
-    "new_strategies": "新策略"
+    "new_strategies": "新策略",
+    "easy_analysis": "简易分析",
+    "easy_analysis_message": "即刻了解大师级人物的概况。一目了然地掌握他们的交易历史、盈利能力、风险和投资组合。",
+    "trade_like_a_pro_in_minute": "几分钟内像专业人士一样交易",
+    "trade_like_pro_step_1": "安装我们的应用程序，\"BlackWell Invest\"",
+    "trade_like_pro_step_2": "选择一个讯号主控并点选 \"复制\""
+
 }

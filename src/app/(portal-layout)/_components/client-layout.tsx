@@ -23,7 +23,7 @@ export default function ClientLayout(props: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-[#3A53BA]">
+    <div className=" h-full w-full bg-[#3A53BA]">
       <PortalNavbar />
 
       {/* Constrained content layer */}
