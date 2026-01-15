@@ -27,5 +27,13 @@
    "easy_analysis_message": "Instant clarity on the Masters’ profile. Get a snapshot of their trade history, profitability, risk, and portfolio all in one place. ",
    "trade_like_a_pro_in_minute": "Trade Like a Pro in Minutes",
    "trade_like_pro_step_1": "Install our app, \"BlackWell Invest\"",
-   "trade_like_pro_step_2": "Choose a signal Master and click \"Copy\""
+   "trade_like_pro_step_2": "Choose a signal Master and click \"Copy\"",
+   "how_to_link_mt4_account": "How to Link MT4 Account",
+   "how_to_link_mt4_account_step2": "Login OR create a new account",
+   "how_to_link_mt4_account_step3": "Click \"Account\"",
+   "how_to_link_mt4_account_step4": "Click \"Link an account\"",
+   "how_to_link_mt4_account_step5": " Select \"BlackwellGlobalAsia-Live\" server",
+   "how_to_link_mt4_account_step6": "Fill in your Blackwell Global trading account OR create a new account ",
+   "how_to_link_mt4_account_step7": "Click \"Copy Trades\"",
+   "how_to_link_mt4_account_step8": "Click \"Done\""
 }

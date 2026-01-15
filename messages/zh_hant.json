@@ -27,7 +27,13 @@
     "easy_analysis_message": "立即了解大師級人物的概況。一目了然地掌握他們的交易歷史、盈利能力、風險和投資組合。",
     "trade_like_a_pro_in_minute": "幾分鐘內像專業人士一樣交易",
     "trade_like_pro_step_1": "安裝我們的應用程序，\"BlackWell Invest\"",
-    "trade_like_pro_step_2": "選擇一個訊號主控並點選 \"複製\""
-
-
+    "trade_like_pro_step_2": "選擇一個訊號主控並點選 \"複製\"",
+    "how_to_link_mt4_account": "如何關聯MT4帳戶",
+    "how_to_link_mt4_account_step2": "登入或建立新帳號",
+    "how_to_link_mt4_account_step3": "點選“帳戶”，",
+    "how_to_link_mt4_account_step4": "點選“關聯帳戶",
+    "how_to_link_mt4_account_step5": "選擇「BlackwellGlobalAsia-Live」伺服器",
+    "how_to_link_mt4_account_step6": "填寫您的Blackwell Global交易帳號或建立新帳號",
+    "how_to_link_mt4_account_step7": "點選“複製交易”，",
+    "how_to_link_mt4_account_step8": "點選“完成”，"
 }

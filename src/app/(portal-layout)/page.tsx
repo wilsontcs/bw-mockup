@@ -2,6 +2,14 @@
 import { Image } from "@heroui/image";
 import { useTranslations } from "next-intl";
 import { Accordion, AccordionItem, Button, Chip, Link } from "@heroui/react";
+import { useState } from "react";
+type LinkAccountBoxProps = {
+  message: string;
+  imagePath: string;
+  prevPressed: () => void;
+  nextPressed: () => void;
+  index: number;
+};
 
 
 export default function Index() {
@@ -98,10 +106,16 @@ export default function Index() {
       <EasyAnalysisPannel></EasyAnalysisPannel>
       <Image
         src="/images/bg-1.png"
-        className="w-full pt-20"
+        className="w-full pt-20 object-fill"
         removeWrapper
       />
       <TradeLikePro></TradeLikePro>
+      <LinkAccount></LinkAccount>
+      <Image
+        src="/images/bg-2.png"
+        className="w-full pt-20 object-fill"
+        removeWrapper
+      />
     </div>
   );
 
@@ -221,7 +235,7 @@ const TradeLikePro = () => {
       <span className="text-sky-400 text-2xl font-semibold">
         {t("trade_like_a_pro_in_minute")}
       </span>
-      <div className="max-w-md mx-auto">
+      <div className="max-w-md mx-auto py-5">
         <Accordion
           selectionMode="single"
           variant="splitted"
@@ -234,7 +248,7 @@ const TradeLikePro = () => {
             <span className="text-yellow-300 text-2xl "> 1</span>
           } key="1" title={t("trade_like_pro_step_1")}
 
-            className="border-2 border-yellow-300 rounded-lg mb-3 bg-transparent text-white"
+            className="border-2 border-yellow-300 rounded-xl mb-3 bg-transparent text-white"
           >
 
             <div className="flex justify-center">
@@ -246,7 +260,7 @@ const TradeLikePro = () => {
           <AccordionItem startContent={
             <span className="text-orange-500 text-2xl"> 2</span>
           } key="2" title={t("trade_like_pro_step_2")}
-            className="border-2 border-orange-500 rounded-lg mb-3 bg-transparent text-white"
+            className="border-2 border-orange-500 rounded-xl mb-3 bg-transparent text-white"
 
           >
             <div className="flex justify-center">
@@ -256,7 +270,7 @@ const TradeLikePro = () => {
           <AccordionItem startContent={
             <span className="text-yellow-300  text-2xl"> 3</span>
           } key="3" title="Step 3 — Deposit Funds"
-            className="border-2 border-yellow-300 rounded-lg mb-3 bg-transparent text-white"
+            className="border-2 border-yellow-300 rounded-xl mb-3 bg-transparent text-white"
 
           >
             <div className="flex justify-center">
@@ -265,7 +279,7 @@ const TradeLikePro = () => {
 
           <AccordionItem startContent={
             <span className="text-orange-500 text-2xl"> 4</span>
-          } key="4" title="Step 4 — Start Trading" className="border-2 border-orange-500 rounded-lg mb-3 bg-transparent text-white"
+          } key="4" title="Step 4 — Start Trading" className="border-2 border-orange-500 rounded-xl mb-3 bg-transparent text-white"
           >
             <div className="flex justify-center">
               <Image src="/images/guide-4.png" className="h-60" removeWrapper />
@@ -282,6 +296,119 @@ const TradeLikePro = () => {
         </Link>
       </div>
 
+    </div>
+  );
+};
+
+const LinkAccountBox = ({
+  message,
+  imagePath,
+  prevPressed,
+  nextPressed,
+  index
+}: LinkAccountBoxProps) => {
+  return (
+    // ⬇️ Add relative here
+    <div className="relative border-2 border-orange-500 rounded-xl mb-3 bg-transparent text-white w-[320px] md:w-full max-h-[300]">
+
+      {/* Left Arrow */}
+      <button
+        onClick={prevPressed}
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-10"
+      >
+        <Image
+          src="/images/arrow.png"
+          alt="Previous"
+          width={40}
+          height={40}
+          className="rotate-180"
+        />
+      </button>
+
+      {/* Right Arrow */}
+      <button
+        onClick={nextPressed}
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-10"
+      >
+        <Image
+          src="/images/arrow.png"
+          alt="Next"
+          width={40}
+          height={40}
+        />
+      </button>
+
+      {/* Content */}
+      <div className="flex flex-col items-center justify-center px-10 py-4">
+        <Image
+          src={imagePath}
+          removeWrapper
+          alt="guide"
+          className="object-contain h-40 sm:h-48 md:h-56"
+        />
+
+        <span className="px-4 py-2 text-center text-sm sm:text-base">
+          {index + 1 + ")"} {message}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+const LinkAccount = () => {
+  const t = useTranslations();
+  const steps = [
+    { message: t("trade_like_pro_step_1"), image: "/images/register-step-1.png" },
+    { message: t("how_to_link_mt4_account_step2"), image: "/images/register-step-2.png" },
+    { message: t("how_to_link_mt4_account_step3"), image: "/images/register-step-3.png" },
+    { message: t("how_to_link_mt4_account_step4"), image: "/images/register-step-4.png" },
+    { message: t("how_to_link_mt4_account_step5"), image: "/images/register-step-5.png" },
+    { message: t("how_to_link_mt4_account_step6"), image: "/images/register-step-6.png" },
+    { message: t("how_to_link_mt4_account_step7"), image: "/images/register-step-7.png" },
+    { message: t("how_to_link_mt4_account_step8"), image: "/images/register-step-8.png" },
+  ];
+  const [index, setIndex] = useState(0);
+
+  const next = () => setIndex((prev) => (prev + 1) % steps.length);
+  const prev = () => setIndex((prev) => (prev - 1 + steps.length) % steps.length);
+
+  return (
+    <div className="pt-10 text-center flex flex-col items-center px-5">
+      <span className="text-sky-400 text-2xl font-semibold">
+        {t("trade_like_a_pro_in_minute")}
+      </span>
+      <div className="pt-10 max-w-md mx-auto relative ">
+
+        {/* Slide container */}
+        <div className="overflow-hidden  md:overflow-visible items-center">
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${index * 100}%)` }}
+          >
+            {steps.map((step, i) => (
+              <div key={i} className="min-w-full px-2">
+                <LinkAccountBox
+                  message={step.message}
+                  imagePath={step.image}
+                  prevPressed={prev}
+                  nextPressed={next}
+                  index={i}
+                />
+              </div>
+            ))}
+          </div>
+
+        </div>
+        <Button
+          variant="solid"
+          className="bg-orange-500 text-white font-semibold w-30 my-2"
+          radius="full"
+        >
+          {t("register_now")}
+        </Button>
+
+
+      </div>
     </div>
   );
 };
