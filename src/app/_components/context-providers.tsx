@@ -5,7 +5,6 @@ import { PortalNavbarProvider } from "../_context/portal-navbar-context";
 import { localeConfigs } from "../config/locale";
 import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export function ContextProviders(
   props: Readonly<{ children: React.ReactNode }>,
@@ -17,8 +16,6 @@ export function ContextProviders(
 
   return (
     <HeroUIProvider locale={uiLocale} navigate={router.push}>
-      <NextThemesProvider enableSystem attribute="class">
-        <PortalNavbarProvider>{props.children}</PortalNavbarProvider>
-      </NextThemesProvider>
+      <PortalNavbarProvider>{props.children}</PortalNavbarProvider>
     </HeroUIProvider>);
 }

@@ -63,5 +63,6 @@
     "country_of_residence": "居住國家",
     "enter_your_message_here": "在此輸入您的訊息",
     "submit": "提交",
-    "submit_success": "提交成功！"
+    "submit_success": "提交成功！",
+    "language": "語言"
 }

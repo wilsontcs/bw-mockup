@@ -39,7 +39,6 @@ const AppleAppleStoreButton = () => {
 }
 
 export default function Index() {
-  const t = useTranslations();
   return (
     <div className="py-5 overflow-x-hidden">
       <div className="hidden md:block">
@@ -106,7 +105,7 @@ const HeaderDesktop = () => {
           <span className="text-2xl text-[#f2df79] font-semibold">
             {t("ready_to_go_strategies")}
           </span>
-          <span>{t("ready_to_go_message")}</span>
+          <span className="max-w-[700px]">{t("ready_to_go_message")}</span>
 
           <div className="flex flex-row gap-x-2 py-2 items-center">
             <Chip variant="bordered" radius="sm" className="text-white">{t("forex")}</Chip>

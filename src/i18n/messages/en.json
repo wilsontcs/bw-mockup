@@ -63,5 +63,6 @@
    "country_of_residence": "Country of Residence",
    "enter_your_message_here": "Enter your message here",
    "submit": "Submit",
-   "submit_success":"Submit Success!"
+   "submit_success":"Submit Success!",
+   "language":"Language"
 }
