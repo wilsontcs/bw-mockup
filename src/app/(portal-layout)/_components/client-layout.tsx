@@ -9,10 +9,7 @@ import { PortalNavbar } from "../../_context/portal-navbar-context";
 
 
 export default function ClientLayout(props: { children: React.ReactNode }) {
-  const windowBreakpoint = useWindowBreakpoint();
-  const pathname = usePathname();
 
-  const isLargeScreen = windowBreakpoint.gte("lg");
 
   useEffect(() => {
     document.documentElement.classList.add("portal-layout");

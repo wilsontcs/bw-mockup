@@ -10,15 +10,17 @@ import {
   DropdownTrigger,
   Navbar,
   NavbarContent,
+  NavbarItem,
 } from "@heroui/react";
 // import Image from "next/image";
 import { Image } from "@heroui/image";
 import { Link } from "@heroui/react";
 
 import useWindowBreakpoint from "./window-breakpoint-context";
-import { LocalConfigProps } from "../config/locale";
+import { LocalConfigProps, localeConfigs } from "../config/locale";
 import { portalNavbarConfig, PortalNavbarConfigProps } from "../config/navigation";
-import { LucideCircleUser } from "lucide-react";
+import { LucideChevronDown, LucideCircleUser, LucideGlobe } from "lucide-react";
+import { textTv } from "../styles/text-tv";
 
 type PortalNavbarContextProps = {
   navbarConfig: PortalNavbarConfigProps[];
@@ -69,25 +71,13 @@ export function usePortalNavbar() {
 }
 
 export function PortalNavbar() {
-  const portalNavbar = usePortalNavbar();
   const windowBreakpoint = useWindowBreakpoint();
 
   const t = useTranslations();
   const locale = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const isActiveMenu = (config: PortalNavbarConfigProps) => {
-    let isActive = portalNavbar.activeMenuKey === config.key;
 
-    // Check if any child is active
-    if (!isActive && config.children) {
-      isActive = config.children.some(
-        (child) => portalNavbar.activeMenuKey === child.key,
-      );
-    }
-
-    return isActive;
-  };
 
   const isActiveLocale = (config: LocalConfigProps) => {
     const isActive = locale === config.key;
@@ -95,9 +85,6 @@ export function PortalNavbar() {
     return isActive;
   };
 
-  const navbarConfigs = (configs: PortalNavbarConfigProps[]) => {
-    return configs.filter((config) => config.isPublic);
-  };
 
   const onLanguageChange = async (config: LocalConfigProps) => {
     const locale = config.key;
@@ -130,9 +117,7 @@ export function PortalNavbar() {
     }
   };
 
-  const togleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+
 
   const targetDate = new Date("2026-02-01T00:00:00");
   const [timeLeft, setTimeLeft] = useState({
@@ -247,6 +232,44 @@ export function PortalNavbar() {
               </DropdownMenu>
             </Dropdown>
           </div>
+          <NavbarItem className="hidden md:block pl-4">
+            <Dropdown
+              classNames={{
+                base: "before:bg-default-200",
+                content: "p-2 border-small border-divider bg-background",
+              }}
+            >
+              <DropdownTrigger>
+                <Button
+                  disableRipple
+                  isIconOnly={windowBreakpoint.lt("md")}
+                  radius="full"
+                  size={"md"}
+                  variant="bordered"
+                >
+                  <div className="flex space-x-3 items-center">
+                    <LucideGlobe size={18} />
+                    <LucideChevronDown
+                      className="hidden md:flex text-white/80"
+                      size={16}
+                    />
+                  </div>
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu>
+                {localeConfigs.map((locale) => (
+                  <DropdownItem
+                    key={locale.key}
+                    onPress={() => onLanguageChange(locale)}
+                  >
+                    <span className={textTv({ active: isActiveLocale(locale) })}>
+                      {locale.label}
+                    </span>
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarItem>
         </div>
       </NavbarContent>
 

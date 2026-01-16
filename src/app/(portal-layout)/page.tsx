@@ -1,8 +1,9 @@
 "use client";
 import { Image } from "@heroui/image";
 import { useTranslations } from "next-intl";
-import { Accordion, AccordionItem, Button, Card, CardBody, Chip, Link } from "@heroui/react";
+import { Accordion, AccordionItem, Button, Card, CardBody, Chip, Input, Link, Select, SelectItem, Tab, Tabs, Textarea } from "@heroui/react";
 import { useState } from "react";
+import { ArrowDownUp, Disc, icons, Search, User, Zap } from "lucide-react";
 type LinkAccountBoxProps = {
   message: string;
   imagePath: string;
@@ -17,74 +18,88 @@ type WhyChooseUsBoxProps = {
   imagePath: string;
 
 };
-  const registerPressed = () => { };
+const registerPressed = () => { };
+
+const GooglePlayButton = () => {
+  return (
+    <>
+      <Link href="https://play.google.com/store/apps/details?id=com.BlackwellGlobalInvestmentsUKLimited.pelican&hl=en" isExternal>
+        <Image src="/images/google-play.jpg" className="w-30" removeWrapper />
+      </Link>
+    </>);
+};
+
+const AppleAppleStoreButton = () => {
+  return (<>
+
+    <Link href="https://apps.apple.com/in/app/blackwell-invest/id1666036351" isExternal>
+      <Image src="/images/app-store.jpg" className="w-30" />
+    </Link>
+  </>);
+}
+
 export default function Index() {
   const t = useTranslations();
+  return (
+    <div className="py-5 overflow-x-hidden">
+      <div className="hidden md:block">
+        <HeaderDesktop />
+      </div>
 
+      {/* Mobile only */}
+      <div className="block md:hidden">
+        <HeaderMobile />
+      </div>
+      <FastMatchingPannel></FastMatchingPannel>
+      <EasyAnalysisPannel></EasyAnalysisPannel>
+      <Image
+        src="/images/bg-1.png"
+        className="w-full pt-20 object-fill"
+        removeWrapper
+      />
+      <TradeLikePro></TradeLikePro>
+      <LinkAccount></LinkAccount>
+      <Image
+        src="/images/bg-2.png"
+        className="w-full pt-20 object-fill"
+        removeWrapper
+      />
+      <WhyChooseUs></WhyChooseUs>
+      <NavigateApp></NavigateApp>
+      <EnquireNowForm></EnquireNowForm>
+    </div>
+  );
 
+}
+const HeaderDesktop = () => {
+  const t = useTranslations();
 
   return (
-    <div className="py-5">
-      <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-5">
+    <div className="flex flex-col md:flex-row justify-center items-start gap-6 px-5">
 
-        {/* ===== Left/Text Column ===== */}
-        <div className="flex flex-col">
+      <Image
+        src="/images/hand.png"
+        className="w-full max-w-[900px] h-auto object-cover"
+        alt="Hand"
+      />
+      {/* ===== Left/Text Column ===== */}
+      <div className="flex flex-col">
 
-          <span className="text-4xl text-[#01f2f2] font-semibold">
-            {t("copy_trading")}
-          </span>
+        <span className="text-4xl text-[#01f2f2] font-semibold">
+          {t("copy_trading")}
+        </span>
 
-          <span className="text-2xl text-white">
-            {t("with_blackwell_invest")}
-          </span>
+        <span className="text-2xl text-white">
+          {t("with_blackwell_invest")}
+        </span>
 
-          <div className="gap-x-4 flex flex-row py-2 justify-start">
-            <Link href="https://play.google.com/store/apps/details?id=com.BlackwellGlobalInvestmentsUKLimited.pelican&hl=en" isExternal>
-              <Image src="/images/google-play.jpg" className="w-30" removeWrapper />
-            </Link>
-            <Link href="https://apps.apple.com/in/app/blackwell-invest/id1666036351" isExternal>
-              <Image src="/images/app-store.jpg" className="w-30" />
-            </Link>
-            <Image src="/images/regular.png" className="w-30 object-fill" />
-          </div>
-
-          <div className="hidden md:flex flex-col">
-            <span className="text-2xl text-[#01f2f2] font-semibold">
-              {t("choose_&_trade")}
-            </span>
-            <span className="text-2xl text-[#f2df79] font-semibold">
-              {t("ready_to_go_strategies")}
-            </span>
-            <span>{t("ready_to_go_message")}</span>
-
-            <div className="flex flex-row gap-x-2 py-2">
-              <Chip variant="bordered" radius="sm" className="text-white">{t("forex")}</Chip>
-              <Chip color="warning" variant="bordered" radius="sm" className="text-white">{t("precious_metals")}</Chip>
-              <Chip color="danger" variant="bordered" radius="sm" className="text-white">{t("oil")}</Chip>
-              <Chip color="primary" variant="bordered" radius="sm" className="text-white">{t("indices")}</Chip>
-            </div>
-
-            <Button
-              variant="solid"
-              className="bg-[#F37406] text-white font-semibold w-30 my-2"
-              radius="full"
-            >
-              {t("register_now")}
-            </Button>
-
-            <span className="italic">{t("invest_hint_message")}</span>
-          </div>
+        <div className="gap-x-4 flex flex-row py-2 justify-start">
+          <GooglePlayButton></GooglePlayButton>
+          <AppleAppleStoreButton></AppleAppleStoreButton>
+          <Image src="/images/regular.png" className="w-30 object-fill" />
         </div>
 
-        {/* ===== Hand Image ===== */}
-        <Image
-          src="/images/hand.png"
-          className="w-full max-w-[500px] h-auto object-cover"
-          alt="Hand"
-        />
-
-        {/* ===== Mobile-only Choose & Trade ===== */}
-        <div className="flex flex-col md:hidden">
+        <div className="hidden md:flex flex-col">
           <span className="text-2xl text-[#01f2f2] font-semibold">
             {t("choose_&_trade")}
           </span>
@@ -93,7 +108,7 @@ export default function Index() {
           </span>
           <span>{t("ready_to_go_message")}</span>
 
-          <div className="flex flex-row gap-x-2 py-2">
+          <div className="flex flex-row gap-x-2 py-2 items-center">
             <Chip variant="bordered" radius="sm" className="text-white">{t("forex")}</Chip>
             <Chip color="warning" variant="bordered" radius="sm" className="text-white">{t("precious_metals")}</Chip>
             <Chip color="danger" variant="bordered" radius="sm" className="text-white">{t("oil")}</Chip>
@@ -111,24 +126,126 @@ export default function Index() {
           <span className="italic">{t("invest_hint_message")}</span>
         </div>
       </div>
-      <FastMatchingPannel></FastMatchingPannel>
-      <EasyAnalysisPannel></EasyAnalysisPannel>
-      <Image
-        src="/images/bg-1.png"
-        className="w-full pt-20 object-fill"
-        removeWrapper
-      />
-      <TradeLikePro></TradeLikePro>
-      <LinkAccount></LinkAccount>
-      <Image
-        src="/images/bg-2.png"
-        className="w-full pt-20 object-fill"
-        removeWrapper
-      />
-      <WhyChooseUs></WhyChooseUs>
+
+
+
+      {/* ===== Mobile-only Choose & Trade ===== */}
+      <div className="flex flex-col md:hidden">
+        <span className="text-2xl text-[#01f2f2] font-semibold">
+          {t("choose_&_trade")}
+        </span>
+        <span className="text-2xl text-[#f2df79] font-semibold">
+          {t("ready_to_go_strategies")}
+        </span>
+        <span>{t("ready_to_go_message")}</span>
+
+        <div className="flex flex-row gap-x-2 py-2">
+          <Chip variant="bordered" radius="sm" className="text-white">{t("forex")}</Chip>
+          <Chip color="warning" variant="bordered" radius="sm" className="text-white">{t("precious_metals")}</Chip>
+          <Chip color="danger" variant="bordered" radius="sm" className="text-white">{t("oil")}</Chip>
+          <Chip color="primary" variant="bordered" radius="sm" className="text-white">{t("indices")}</Chip>
+        </div>
+
+        <Button
+          variant="solid"
+          className="bg-[#F37406] text-white font-semibold w-30 my-2"
+          radius="full"
+        >
+          {t("register_now")}
+        </Button>
+
+        <span className="italic">{t("invest_hint_message")}</span>
+      </div>
     </div>
   );
+}
+const HeaderMobile = () => {
+  const t = useTranslations();
 
+  return (
+    <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-5">
+
+      {/* ===== Left/Text Column ===== */}
+      <div className="flex flex-col">
+
+        <span className="text-4xl text-[#01f2f2] font-semibold">
+          {t("copy_trading")}
+        </span>
+
+        <span className="text-2xl text-white">
+          {t("with_blackwell_invest")}
+        </span>
+
+        <div className="gap-x-4 flex flex-row py-2 justify-start">
+          <GooglePlayButton></GooglePlayButton>
+          <AppleAppleStoreButton></AppleAppleStoreButton>
+          <Image src="/images/regular.png" className="w-30 object-fill" />
+        </div>
+
+        <div className="hidden md:flex flex-col">
+          <span className="text-2xl text-[#01f2f2] font-semibold">
+            {t("choose_&_trade")}
+          </span>
+          <span className="text-2xl text-[#f2df79] font-semibold">
+            {t("ready_to_go_strategies")}
+          </span>
+          <span>{t("ready_to_go_message")}</span>
+
+          <div className="flex flex-row gap-x-2 py-2 items-center">
+            <Chip variant="bordered" radius="sm" className="text-white">{t("forex")}</Chip>
+            <Chip color="warning" variant="bordered" radius="sm" className="text-white">{t("precious_metals")}</Chip>
+            <Chip color="danger" variant="bordered" radius="sm" className="text-white">{t("oil")}</Chip>
+            <Chip color="primary" variant="bordered" radius="sm" className="text-white">{t("indices")}</Chip>
+          </div>
+
+          <Button
+            variant="solid"
+            className="bg-[#F37406] text-white font-semibold w-30 my-2"
+            radius="full"
+          >
+            {t("register_now")}
+          </Button>
+
+          <span className="italic">{t("invest_hint_message")}</span>
+        </div>
+      </div>
+
+      {/* ===== Hand Image ===== */}
+      <Image
+        src="/images/hand.png"
+        className="w-full max-w-[500px] h-auto object-cover"
+        alt="Hand"
+      />
+
+      {/* ===== Mobile-only Choose & Trade ===== */}
+      <div className="flex flex-col md:hidden">
+        <span className="text-2xl text-[#01f2f2] font-semibold">
+          {t("choose_&_trade")}
+        </span>
+        <span className="text-2xl text-[#f2df79] font-semibold">
+          {t("ready_to_go_strategies")}
+        </span>
+        <span>{t("ready_to_go_message")}</span>
+
+        <div className="flex flex-row gap-x-2 py-2 ">
+          <Chip variant="bordered" radius="sm" className="text-white">{t("forex")}</Chip>
+          <Chip color="warning" variant="bordered" radius="sm" className="text-white">{t("precious_metals")}</Chip>
+          <Chip color="danger" variant="bordered" radius="sm" className="text-white">{t("oil")}</Chip>
+          <Chip color="primary" variant="bordered" radius="sm" className="text-white">{t("indices")}</Chip>
+        </div>
+
+        <Button
+          variant="solid"
+          className="bg-[#F37406] text-white font-semibold w-30 my-2"
+          radius="full"
+        >
+          {t("register_now")}
+        </Button>
+
+        <span className="italic">{t("invest_hint_message")}</span>
+      </div>
+    </div>
+  );
 }
 const FastMatchingPannel = () => {
   const t = useTranslations();
@@ -298,12 +415,8 @@ const TradeLikePro = () => {
       </div>
 
       <div className="gap-x-4 flex flex-row py-2 justify-start">
-        <Link href="https://play.google.com/store/apps/details?id=com.BlackwellGlobalInvestmentsUKLimited.pelican&hl=en" isExternal>
-          <Image src="/images/google-play.jpg" className="w-30" removeWrapper />
-        </Link>
-        <Link href="https://apps.apple.com/in/app/blackwell-invest/id1666036351" isExternal>
-          <Image src="/images/app-store.jpg" className="w-30" />
-        </Link>
+        <GooglePlayButton />
+        <AppleAppleStoreButton />
       </div>
 
     </div>
@@ -385,12 +498,12 @@ const LinkAccount = () => {
   return (
     <div className="pt-10 text-center flex flex-col items-center px-5">
       <span className="text-[#01f2f2] text-2xl font-semibold">
-        {t("trade_like_a_pro_in_minute")}
+        {t("how_to_link_mt4_account")}
       </span>
-      <div className="pt-10 max-w-md mx-auto relative ">
 
-        {/* Slide container */}
-        <div className="overflow-hidden  md:overflow-visible items-center">
+      {/* Slider stays width-limited and centered */}
+      <div className="pt-10 max-w-md mx-auto relative w-full">
+        <div className="overflow-hidden md:overflow-visible items-center">
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${index * 100}%)` }}
@@ -407,19 +520,21 @@ const LinkAccount = () => {
               </div>
             ))}
           </div>
-
         </div>
+      </div>
+
+      {/* Button OUTSIDE width constraint */}
+      <div className="flex justify-center mt-4">
         <Button
           variant="solid"
-          className="bg-[#F37406] text-white font-semibold w-30 my-2"
+          className="bg-[#F37406] text-white font-semibold w-30"
           radius="full"
         >
           {t("register_now")}
         </Button>
-
-
       </div>
     </div>
+
   );
 };
 
@@ -481,6 +596,212 @@ const WhyChooseUs = () => {
         {t("register_now")}
       </Button>
 
+    </div>
+  );
+};
+const NavigateApp = () => {
+  const t = useTranslations();
+  const tabs = [
+    {
+      id: "discover",
+      label: t("discover"),
+      message: t("discover_message"),
+      image: "/images/reason-1.png",
+      icon: <Search></Search>
+    },
+    {
+      id: "activity",
+      label: t("activity"),
+      message: t("activity_message"),
+      image: "/images/reason-2.png",
+      icon: <Zap></Zap>
+
+    },
+    {
+      id: "trade",
+      label: t("trade"),
+      message: t("trade_message"),
+      image: "/images/reason-3.png",
+      icon: <ArrowDownUp></ArrowDownUp>
+
+    },
+    {
+      id: "positions",
+      label: t("positions"),
+      message: t("positions_message"),
+      image: "/images/reason-4.png",
+      icon: <Disc></Disc>
+
+    },
+    {
+      id: "account",
+      label: t("account"),
+      message: t("account_message"),
+      image: "/images/reason-5.png",
+      icon: <User></User>
+
+    },
+  ];
+  return (
+    <div className="pt-10 text-center flex flex-col items-center px-5">
+      <span className="text-[#01f2f2] text-2xl font-semibold">
+        {t("navigate_app_title")}?
+      </span>
+
+      <div className="flex flex-col pt-5 w-full items-center">
+        <Tabs aria-label="Dynamic tabs" items={tabs} className="w-full "
+
+          classNames={{
+            tabList: "mx-auto bg-white p-1",
+            tab: "px-4 py-2",
+            cursor: "hidden",
+            tabContent: `
+    text-[#F37406]
+    group-data-[selected=true]:text-[#040dbf]
+  `
+          }}
+        >
+          {(item) => (
+            <Tab key={item.id} title={
+              <div className="flex items-center space-x-2 h-full ">
+                {item.icon}
+              </div>
+            }>
+              <Card className="bg-[#ffdf6b] max-w-4xl mx-auto w-full">
+                <CardBody>
+                  <div className="flex flex-col md:flex-row items-center md:items-start gap-6 w-full">
+
+                    {/* Text Section takes remaining space */}
+                    <div className="flex flex-col text-left justify-between flex-1">
+                      <span className="text-[#040dbf] font-semibold text-lg">
+                        {item.label}
+                      </span>
+                      <span className="text-black mt-2">
+                        {item.message}
+                      </span>
+                    </div>
+
+                    {/* Image stays at right end */}
+                    <Image
+                      src={item.image}
+                      className="h-48 w-96 object-contain flex-shrink-0"
+                    />
+
+                  </div>
+
+                </CardBody>
+              </Card>
+            </Tab>
+          )
+          }
+        </Tabs >
+      </div >
+
+      <div className="gap-x-4 flex flex-row py-2 justify-start">
+        <GooglePlayButton />
+        <AppleAppleStoreButton />
+      </div>
+    </div >
+
+  );
+};
+
+const EnquireNowForm = () => {
+  const t = useTranslations();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [country, setCountry] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = () => {
+    // 👉 Here you can later send API request
+
+    // Show system dialog
+    alert(t("submit_success")); // "Submit successful!"
+
+    // Reset fields
+    setName("");
+    setEmail("");
+    setMobile("");
+    setCountry("");
+    setMessage("");
+  };
+
+  return (
+
+    <div className="my-10 relative overflow-hidden">
+      <Image
+        src="/images/bg-3.png"
+        removeWrapper
+        className="absolute inset-0 w-full h-full object-fill rounded-none"
+      />
+
+      <div className="pt-20 text-center flex flex-col items-center px-5 relative z-10 pb-10">
+        <span className="text-[#01f2f2] text-2xl font-semibold">
+          {t("enquire_now")}
+        </span>
+
+        <div className="flex flex-col gap-3 w-full max-w-md mt-5">
+
+          <div className="flex flex-col sm:flex-row gap-2 w-full">
+            <Input
+              label={t("name")}
+              variant="bordered"
+              className="flex-1"
+              value={name}
+              onValueChange={setName}
+            />
+            <Input
+              label={t("email")}
+              type="email"
+              variant="bordered"
+              className="flex-1"
+              value={email}
+              onValueChange={setEmail}
+            />
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-2 w-full">
+            <Input
+              label={t("mobile_no")}
+              variant="bordered"
+              className="flex-1"
+              value={mobile}
+              onValueChange={setMobile}
+            />
+
+            <Select
+              label={t("country_of_residence")}
+              variant="bordered"
+              className="flex-1"
+              selectedKeys={country ? [country] : []}
+              onSelectionChange={(keys) => setCountry([...keys][0] as string)}
+            >
+              <SelectItem key="MY">Malaysia</SelectItem>
+              <SelectItem key="SG">Singapore</SelectItem>
+            </Select>
+          </div>
+
+          <Textarea
+            placeholder={t("enter_your_message_here")}
+            variant="bordered"
+            className="w-full"
+            value={message}
+            onValueChange={setMessage}
+          />
+        </div>
+
+        <Button
+          variant="solid"
+          className="bg-[#F37406] text-white font-semibold w-30 my-5"
+          radius="full"
+          onPress={handleSubmit}
+        >
+          {t("submit")}
+        </Button>
+      </div>
     </div>
   );
 };
