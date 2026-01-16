@@ -1,7 +1,7 @@
 "use client";
 import { Image } from "@heroui/image";
 import { useTranslations } from "next-intl";
-import { Accordion, AccordionItem, Button, Chip, Link } from "@heroui/react";
+import { Accordion, AccordionItem, Button, Card, CardBody, Chip, Link } from "@heroui/react";
 import { useState } from "react";
 type LinkAccountBoxProps = {
   message: string;
@@ -11,9 +11,18 @@ type LinkAccountBoxProps = {
   index: number;
 };
 
+type WhyChooseUsBoxProps = {
+  message: string;
+  title: string;
+  imagePath: string;
 
+};
+  const registerPressed = () => { };
 export default function Index() {
   const t = useTranslations();
+
+
+
   return (
     <div className="py-5">
       <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-5">
@@ -21,7 +30,7 @@ export default function Index() {
         {/* ===== Left/Text Column ===== */}
         <div className="flex flex-col">
 
-          <span className="text-4xl text-sky-400 font-semibold">
+          <span className="text-4xl text-[#01f2f2] font-semibold">
             {t("copy_trading")}
           </span>
 
@@ -40,10 +49,10 @@ export default function Index() {
           </div>
 
           <div className="hidden md:flex flex-col">
-            <span className="text-2xl text-sky-400 font-semibold">
+            <span className="text-2xl text-[#01f2f2] font-semibold">
               {t("choose_&_trade")}
             </span>
-            <span className="text-2xl text-yellow-300 font-semibold">
+            <span className="text-2xl text-[#f2df79] font-semibold">
               {t("ready_to_go_strategies")}
             </span>
             <span>{t("ready_to_go_message")}</span>
@@ -57,7 +66,7 @@ export default function Index() {
 
             <Button
               variant="solid"
-              className="bg-orange-500 text-white font-semibold w-30 my-2"
+              className="bg-[#F37406] text-white font-semibold w-30 my-2"
               radius="full"
             >
               {t("register_now")}
@@ -76,10 +85,10 @@ export default function Index() {
 
         {/* ===== Mobile-only Choose & Trade ===== */}
         <div className="flex flex-col md:hidden">
-          <span className="text-2xl text-sky-400 font-semibold">
+          <span className="text-2xl text-[#01f2f2] font-semibold">
             {t("choose_&_trade")}
           </span>
-          <span className="text-2xl text-yellow-300 font-semibold">
+          <span className="text-2xl text-[#f2df79] font-semibold">
             {t("ready_to_go_strategies")}
           </span>
           <span>{t("ready_to_go_message")}</span>
@@ -93,7 +102,7 @@ export default function Index() {
 
           <Button
             variant="solid"
-            className="bg-orange-500 text-white font-semibold w-30 my-2"
+            className="bg-[#F37406] text-white font-semibold w-30 my-2"
             radius="full"
           >
             {t("register_now")}
@@ -116,6 +125,7 @@ export default function Index() {
         className="w-full pt-20 object-fill"
         removeWrapper
       />
+      <WhyChooseUs></WhyChooseUs>
     </div>
   );
 
@@ -125,7 +135,7 @@ const FastMatchingPannel = () => {
 
   return (
     <div className="pt-10 text-center px-5">
-      <span className="text-sky-400 text-2xl font-semibold">
+      <span className="text-[#01f2f2] text-2xl font-semibold">
         {t("fast_matching")}
       </span>
 
@@ -180,10 +190,10 @@ const EasyAnalysisPannel = () => {
 
   return (
     <div className="pt-10 text-center flex flex-col items-center px-5">
-      <span className="text-sky-400 text-2xl font-semibold">
+      <span className="text-[#01f2f2] text-2xl font-semibold">
         {t("easy_analysis")}
       </span>
-      <span className="pt-2 pb-5 text-yellow-300">{t("easy_analysis_message")}</span>
+      <span className="pt-2 pb-5 text-[#f2df79]">{t("easy_analysis_message")}</span>
       <div className="relative w-30 h-60">
 
         {/* Back image */}
@@ -232,7 +242,7 @@ const TradeLikePro = () => {
 
   return (
     <div className=" text-center flex flex-col items-center px-5">
-      <span className="text-sky-400 text-2xl font-semibold">
+      <span className="text-[#01f2f2] text-2xl font-semibold">
         {t("trade_like_a_pro_in_minute")}
       </span>
       <div className="max-w-md mx-auto py-5">
@@ -245,10 +255,10 @@ const TradeLikePro = () => {
         >
 
           <AccordionItem startContent={
-            <span className="text-yellow-300 text-2xl "> 1</span>
+            <span className="text-[#f2df79] text-2xl "> 1</span>
           } key="1" title={t("trade_like_pro_step_1")}
 
-            className="border-2 border-yellow-300 rounded-xl mb-3 bg-transparent text-white"
+            className="border-2 border-[#f2df79] rounded-xl mb-3 bg-transparent text-white"
           >
 
             <div className="flex justify-center">
@@ -258,9 +268,9 @@ const TradeLikePro = () => {
           </AccordionItem>
 
           <AccordionItem startContent={
-            <span className="text-orange-500 text-2xl"> 2</span>
+            <span className="text-[#F37406] text-2xl"> 2</span>
           } key="2" title={t("trade_like_pro_step_2")}
-            className="border-2 border-orange-500 rounded-xl mb-3 bg-transparent text-white"
+            className="border-2 border-[#F37406] rounded-xl mb-3 bg-transparent text-white"
 
           >
             <div className="flex justify-center">
@@ -268,9 +278,9 @@ const TradeLikePro = () => {
             </div>          </AccordionItem>
 
           <AccordionItem startContent={
-            <span className="text-yellow-300  text-2xl"> 3</span>
+            <span className="text-[#f2df79]  text-2xl"> 3</span>
           } key="3" title="Step 3 — Deposit Funds"
-            className="border-2 border-yellow-300 rounded-xl mb-3 bg-transparent text-white"
+            className="border-2 border-[#f2df79] rounded-xl mb-3 bg-transparent text-white"
 
           >
             <div className="flex justify-center">
@@ -278,8 +288,8 @@ const TradeLikePro = () => {
             </div>          </AccordionItem>
 
           <AccordionItem startContent={
-            <span className="text-orange-500 text-2xl"> 4</span>
-          } key="4" title="Step 4 — Start Trading" className="border-2 border-orange-500 rounded-xl mb-3 bg-transparent text-white"
+            <span className="text-[#F37406] text-2xl"> 4</span>
+          } key="4" title="Step 4 — Start Trading" className="border-2 border-[#F37406] rounded-xl mb-3 bg-transparent text-white"
           >
             <div className="flex justify-center">
               <Image src="/images/guide-4.png" className="h-60" removeWrapper />
@@ -309,7 +319,7 @@ const LinkAccountBox = ({
 }: LinkAccountBoxProps) => {
   return (
     // ⬇️ Add relative here
-    <div className="relative border-2 border-orange-500 rounded-xl mb-3 bg-transparent text-white w-[320px] md:w-full max-h-[300]">
+    <div className="relative border-2 border-[#F37406] rounded-xl mb-3 bg-transparent text-white w-[320px] md:w-full max-h-[300]">
 
       {/* Left Arrow */}
       <button
@@ -374,7 +384,7 @@ const LinkAccount = () => {
 
   return (
     <div className="pt-10 text-center flex flex-col items-center px-5">
-      <span className="text-sky-400 text-2xl font-semibold">
+      <span className="text-[#01f2f2] text-2xl font-semibold">
         {t("trade_like_a_pro_in_minute")}
       </span>
       <div className="pt-10 max-w-md mx-auto relative ">
@@ -401,7 +411,7 @@ const LinkAccount = () => {
         </div>
         <Button
           variant="solid"
-          className="bg-orange-500 text-white font-semibold w-30 my-2"
+          className="bg-[#F37406] text-white font-semibold w-30 my-2"
           radius="full"
         >
           {t("register_now")}
@@ -409,6 +419,68 @@ const LinkAccount = () => {
 
 
       </div>
+    </div>
+  );
+};
+
+const WhyChooseUsBox = ({
+  message,
+  title,
+  imagePath,
+}: WhyChooseUsBoxProps) => {
+  return (
+    <Card className="bg-white w-full">
+      <CardBody>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 w-full">
+
+          {/* Top row: Icon + Title */}
+          <div className="flex items-center gap-x-4">
+            <Image
+              src={imagePath}
+              className="w-14 h-14 flex-shrink-0"
+              removeWrapper
+            />
+            <span className="text-[#040dbf] font-semibold whitespace-nowrap">
+              {title}
+            </span>
+          </div>
+
+          {/* Message */}
+          <span className="text-black sm:flex-1 text-left">
+            {message}
+          </span>
+
+        </div>
+      </CardBody>
+    </Card>
+  );
+};
+
+
+
+const WhyChooseUs = () => {
+  const t = useTranslations();
+
+  return (
+    <div className="text-center flex flex-col items-center px-5 w-full">
+      <span className="text-[#01f2f2] text-2xl font-semibold">
+        {t("why_choose_us")}?
+      </span>
+      <div className="pt-5 max-w-4xl mx-auto w-full flex flex-col gap-y-3">
+        <WhyChooseUsBox imagePath="/images/why-choose-us-1.png" title={t("regulated")} message={t("why_choose_us_message1")}></WhyChooseUsBox>
+        <WhyChooseUsBox imagePath="/images/why-choose-us-2.png" title={"0 " + t("comission")} message={t("why_choose_us_message2")}></WhyChooseUsBox>
+        <WhyChooseUsBox imagePath="/images/why-choose-us-3.png" title={t("user_friendly")} message={t("why_choose_us_message3")}></WhyChooseUsBox>
+        <WhyChooseUsBox imagePath="/images/why-choose-us-4.png" title={t("tier_1_liquidity")} message={t("why_choose_us_message4")}></WhyChooseUsBox>
+      </div>
+      <Button
+        variant="solid"
+        className="bg-[#F37406] text-white font-semibold w-30 my-5"
+        radius="full"
+        onPress={registerPressed}
+      >
+        {t("register_now")}
+      </Button>
+
     </div>
   );
 };
