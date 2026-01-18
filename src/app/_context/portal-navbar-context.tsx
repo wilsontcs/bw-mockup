@@ -23,6 +23,9 @@ import { LocalConfigProps, localeConfigs } from "../config/locale";
 import { portalNavbarConfig, PortalNavbarConfigProps } from "../config/navigation";
 import { LucideChevronDown, LucideCircleUser, LucideGlobe } from "lucide-react";
 import { textTv } from "../styles/text-tv";
+import { useUserData } from "./user-data-context";
+import AuthModal from "../(portal-layout)/_components/auth-modal";
+import { logout } from "../services/fake-auth";
 
 /* ---------------- Context (unchanged) ---------------- */
 
@@ -105,6 +108,9 @@ export function PortalNavbar() {
 
     return () => clearInterval(timer);
   }, []);
+  const { isAuthenticated, logout, user } = useUserData();
+
+  const [openAuth, setOpenAuth] = useState(false);
 
   return (
     <Navbar
@@ -150,18 +156,55 @@ export function PortalNavbar() {
 
         {/* RIGHT */}
         <div className="ml-auto flex items-center gap-4">
-          <Button className="bg-orange-500 text-white font-semibold" radius="full">
-            {t("register_now")}
-          </Button>
+          {
+            isAuthenticated ? (
+              <span className="text-sm">{t("logged_in_message", {
+                name: user?.firstName ?? "",
+              })}</span>
+            ) : (
+              <Button className="bg-orange-500 text-white font-semibold" radius="full" onPress={() => setOpenAuth(true)}>
+                {t("register_now")}
+              </Button>
 
-          <Dropdown>
-            <DropdownTrigger>
-              <LucideCircleUser size={34} className="text-white" />
-            </DropdownTrigger>
-            <DropdownMenu>
-              <DropdownItem key="login">{t("login")}</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+            )
+          }
+
+
+          {
+            isAuthenticated ? (
+              <Dropdown>
+                <DropdownTrigger>
+                  <LucideCircleUser size={34} className="text-white cursor-pointer" />
+                </DropdownTrigger>
+                <DropdownMenu>
+                  <DropdownItem
+                    key="logout"
+                    className="text-danger"
+                    onPress={logout}
+                  >
+                    {t("logout")}
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              <Dropdown>
+                <DropdownTrigger>
+                  <LucideCircleUser size={34} className="text-white cursor-pointer" />
+                </DropdownTrigger>
+                <DropdownMenu>
+                  <DropdownItem
+                    key="login"
+                    onPress={() => setOpenAuth(true)}
+                  >
+                    {t("login")}
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            )
+          }
+          <AuthModal open={openAuth} onClose={() => setOpenAuth(false)} />
+
+
 
           {/* Language */}
           <Dropdown>
@@ -186,17 +229,36 @@ export function PortalNavbar() {
 
       {/* ----------- Mobile Menu ----------- */}
       <NavbarMenu className="bg-[#112a4d] text-white space-y-4">
-        <NavbarMenuItem>
-          <Button className="bg-orange-500 text-white w-full" radius="full">
-            {t("register_now")}
-          </Button>
-        </NavbarMenuItem>
+        {
+          !isAuthenticated && (
+            <NavbarMenuItem>
+              <Button className="bg-orange-500 text-white w-full" radius="full" onPress={() => setOpenAuth(true)}>
+                {t("register_now")}
+              </Button>
+            </NavbarMenuItem>
+          )
+        }
 
-        <NavbarMenuItem>
-          <Button variant="light" className="w-full text-white">
-            {t("login")}
-          </Button>
-        </NavbarMenuItem>
+
+        {
+          !isAuthenticated && (
+            <NavbarMenuItem>
+              <Button  radius="full" className="bg-sky-500 w-full text-white" onPress={() => setOpenAuth(true)}>
+                {t("login")}
+              </Button>
+            </NavbarMenuItem>
+          )
+        }
+
+          {
+          isAuthenticated && (
+            <NavbarMenuItem>
+              <Button radius="full" className="w-full text-white" color="danger" onPress={() => logout()}>
+                {t("logout")}
+              </Button>
+            </NavbarMenuItem>
+          )
+        }
 
         <NavbarMenuItem>
           <Dropdown>
@@ -216,6 +278,6 @@ export function PortalNavbar() {
           </Dropdown>
         </NavbarMenuItem>
       </NavbarMenu>
-    </Navbar>
+    </Navbar >
   );
 }

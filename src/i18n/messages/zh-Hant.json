@@ -64,5 +64,8 @@
     "enter_your_message_here": "在此輸入您的訊息",
     "submit": "提交",
     "submit_success": "提交成功！",
-    "language": "語言"
+    "language": "語言",
+    "logout": "注销",
+    "signup": "註冊",
+    "logged_in_message": "您好 {name}，歡迎來到 Blackwell，請立即驗證您的電子郵件。"
 }

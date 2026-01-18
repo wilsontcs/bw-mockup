@@ -63,8 +63,9 @@
     "country_of_residence": "居住国家",
     "enter_your_message_here": "在此输入您的消息",
     "submit": "提交",
-    "submit_success":"提交成功！",
-    "language": "语言"
-
-
+    "submit_success": "提交成功！",
+    "language": "语言",
+    "logout": "注销",
+    "signup": "注册",
+    "logged_in_message":"您好 {name}，欢迎来到 Blackwell，请立即验证您的电子邮件。"
 }

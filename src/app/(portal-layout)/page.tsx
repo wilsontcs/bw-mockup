@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import { Accordion, AccordionItem, Button, Card, CardBody, Chip, Input, Link, Select, SelectItem, Tab, Tabs, Textarea } from "@heroui/react";
 import { useState } from "react";
 import { ArrowDownUp, Disc, icons, Search, User, Zap } from "lucide-react";
+import { useUserData } from "../_context/user-data-context";
+import AuthModal from "./_components/auth-modal";
 type LinkAccountBoxProps = {
   message: string;
   imagePath: string;
@@ -18,7 +20,6 @@ type WhyChooseUsBoxProps = {
   imagePath: string;
 
 };
-const registerPressed = () => { };
 
 const GooglePlayButton = () => {
   return (
@@ -39,39 +40,38 @@ const AppleAppleStoreButton = () => {
 }
 
 export default function Index() {
+  const [openAuth, setOpenAuth] = useState(false);
+
   return (
-    <div className="py-5 overflow-x-hidden">
+    <div className="py-5 overflow-x-hidden relative">
+      {/* ===== Original Page Content ===== */}
       <div className="hidden md:block">
-        <HeaderDesktop />
+        <HeaderDesktop onRegister={() => setOpenAuth(true)} />
       </div>
 
-      {/* Mobile only */}
       <div className="block md:hidden">
-        <HeaderMobile />
+        <HeaderMobile onRegister={() => setOpenAuth(true)} />
       </div>
-      <FastMatchingPannel></FastMatchingPannel>
-      <EasyAnalysisPannel></EasyAnalysisPannel>
-      <Image
-        src="/images/bg-1.png"
-        className="w-full pt-20 object-fill"
-        removeWrapper
-      />
-      <TradeLikePro></TradeLikePro>
-      <LinkAccount></LinkAccount>
-      <Image
-        src="/images/bg-2.png"
-        className="w-full pt-20 object-fill"
-        removeWrapper
-      />
-      <WhyChooseUs></WhyChooseUs>
-      <NavigateApp></NavigateApp>
-      <EnquireNowForm></EnquireNowForm>
+
+      <FastMatchingPannel />
+      <EasyAnalysisPannel />
+      <Image src="/images/bg-1.png" className="w-full pt-20 object-fill" removeWrapper />
+      <TradeLikePro />
+      <LinkAccount onRegister={() => setOpenAuth(true)} />
+      <Image src="/images/bg-2.png" className="w-full pt-20 object-fill" removeWrapper />
+      <WhyChooseUs onRegister={() => setOpenAuth(true)} />
+      <NavigateApp />
+      <EnquireNowForm />
+
+      {/* ===== Auth Modal ===== */}
+      <AuthModal open={openAuth} onClose={() => setOpenAuth(false)} />
     </div>
   );
-
 }
-const HeaderDesktop = () => {
+
+const HeaderDesktop = ({ onRegister }: { onRegister: () => void }) => {
   const t = useTranslations();
+  const { isAuthenticated } = useUserData();
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-start gap-6 px-5">
@@ -114,13 +114,16 @@ const HeaderDesktop = () => {
             <Chip color="primary" variant="bordered" radius="sm" className="text-white">{t("indices")}</Chip>
           </div>
 
-          <Button
-            variant="solid"
-            className="bg-[#F37406] text-white font-semibold w-30 my-2"
-            radius="full"
-          >
-            {t("register_now")}
-          </Button>
+          {!isAuthenticated && (
+            <Button
+              variant="solid"
+              className="bg-[#F37406] text-white font-semibold w-30 my-2"
+              radius="full"
+              onPress={onRegister}
+            >
+              {t("register_now")}
+            </Button>
+          )}
 
           <span className="italic">{t("invest_hint_message")}</span>
         </div>
@@ -145,21 +148,25 @@ const HeaderDesktop = () => {
           <Chip color="primary" variant="bordered" radius="sm" className="text-white">{t("indices")}</Chip>
         </div>
 
-        <Button
-          variant="solid"
-          className="bg-[#F37406] text-white font-semibold w-30 my-2"
-          radius="full"
-        >
-          {t("register_now")}
-        </Button>
+        {!isAuthenticated && (
+          <Button
+            variant="solid"
+            className="bg-[#F37406] text-white font-semibold w-30 my-2"
+            radius="full"
+            onPress={onRegister}
+          >
+            {t("register_now")}
+          </Button>
+        )}
 
         <span className="italic">{t("invest_hint_message")}</span>
       </div>
     </div>
   );
 }
-const HeaderMobile = () => {
+const HeaderMobile = ({ onRegister }: { onRegister: () => void }) => {
   const t = useTranslations();
+  const { isAuthenticated } = useUserData();
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-5">
@@ -197,13 +204,16 @@ const HeaderMobile = () => {
             <Chip color="primary" variant="bordered" radius="sm" className="text-white">{t("indices")}</Chip>
           </div>
 
-          <Button
-            variant="solid"
-            className="bg-[#F37406] text-white font-semibold w-30 my-2"
-            radius="full"
-          >
-            {t("register_now")}
-          </Button>
+          {!isAuthenticated && (
+            <Button
+              variant="solid"
+              className="bg-[#F37406] text-white font-semibold w-30 my-2"
+              radius="full"
+              onPress={onRegister}
+            >
+              {t("register_now")}
+            </Button>
+          )}
 
           <span className="italic">{t("invest_hint_message")}</span>
         </div>
@@ -233,14 +243,15 @@ const HeaderMobile = () => {
           <Chip color="primary" variant="bordered" radius="sm" className="text-white">{t("indices")}</Chip>
         </div>
 
-        <Button
-          variant="solid"
-          className="bg-[#F37406] text-white font-semibold w-30 my-2"
-          radius="full"
-        >
-          {t("register_now")}
-        </Button>
-
+        {!isAuthenticated && (
+          <Button
+            variant="solid"
+            className="bg-[#F37406] text-white font-semibold w-30 my-2"
+            radius="full"
+          >
+            {t("register_now")}
+          </Button>
+        )}
         <span className="italic">{t("invest_hint_message")}</span>
       </div>
     </div>
@@ -477,7 +488,7 @@ const LinkAccountBox = ({
   );
 };
 
-const LinkAccount = () => {
+const LinkAccount = ({ onRegister }: { onRegister: () => void }) => {
   const t = useTranslations();
   const steps = [
     { message: t("trade_like_pro_step_1"), image: "/images/register-step-1.png" },
@@ -493,6 +504,7 @@ const LinkAccount = () => {
 
   const next = () => setIndex((prev) => (prev + 1) % steps.length);
   const prev = () => setIndex((prev) => (prev - 1 + steps.length) % steps.length);
+  const { isAuthenticated } = useUserData();
 
   return (
     <div className="pt-10 text-center flex flex-col items-center px-5">
@@ -522,16 +534,18 @@ const LinkAccount = () => {
         </div>
       </div>
 
-      {/* Button OUTSIDE width constraint */}
-      <div className="flex justify-center mt-4">
-        <Button
-          variant="solid"
-          className="bg-[#F37406] text-white font-semibold w-30"
-          radius="full"
-        >
-          {t("register_now")}
-        </Button>
-      </div>
+      {!isAuthenticated && (
+        <div className="flex justify-center mt-4">
+          <Button
+            variant="solid"
+            className="bg-[#F37406] text-white font-semibold w-30"
+            radius="full"
+            onPress={onRegister}
+          >
+            {t("register_now")}
+          </Button>
+        </div>
+      )}
     </div>
 
   );
@@ -572,8 +586,9 @@ const WhyChooseUsBox = ({
 
 
 
-const WhyChooseUs = () => {
+const WhyChooseUs = ({ onRegister }: { onRegister: () => void }) => {
   const t = useTranslations();
+  const { isAuthenticated } = useUserData();
 
   return (
     <div className="text-center flex flex-col items-center px-5 w-full">
@@ -586,14 +601,18 @@ const WhyChooseUs = () => {
         <WhyChooseUsBox imagePath="/images/why-choose-us-3.png" title={t("user_friendly")} message={t("why_choose_us_message3")}></WhyChooseUsBox>
         <WhyChooseUsBox imagePath="/images/why-choose-us-4.png" title={t("tier_1_liquidity")} message={t("why_choose_us_message4")}></WhyChooseUsBox>
       </div>
-      <Button
-        variant="solid"
-        className="bg-[#F37406] text-white font-semibold w-30 my-5"
-        radius="full"
-        onPress={registerPressed}
-      >
-        {t("register_now")}
-      </Button>
+
+      {!isAuthenticated && (
+        <Button
+          variant="solid"
+          className="bg-[#F37406] text-white font-semibold w-30 my-5"
+          radius="full"
+          onPress={onRegister}
+        >
+          {t("register_now")}
+        </Button>
+      )}
+
 
     </div>
   );

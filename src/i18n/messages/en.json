@@ -64,5 +64,8 @@
    "enter_your_message_here": "Enter your message here",
    "submit": "Submit",
    "submit_success":"Submit Success!",
-   "language":"Language"
+   "language":"Language",
+   "logout":"Logout",
+   "signup":"Signup",
+   "logged_in_message":"Hi {name}, welcome to Blackwell, please verify your email immediately."
 }
